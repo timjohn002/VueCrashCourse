@@ -1,12 +1,6 @@
- <script>
-
+ <script setup>
 import { ref } from 'vue';
-
-
 // This is for Composition API
-export default {
-  // Need to export default to have access to data and methods in my template
-  setup() {
     const name = ref("John Doe");
     const status = ref("active");
     const tasks = ref([{
@@ -35,15 +29,6 @@ export default {
         status.value = 'active';
       }
     }
-
-    return {
-      name,
-      status,
-      tasks,
-      toggleStatus
-    }
-  }
-  };
 </script>
 
 
