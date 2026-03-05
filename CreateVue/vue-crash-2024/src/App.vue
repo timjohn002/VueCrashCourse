@@ -1,19 +1,21 @@
  <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 // This is for Composition API
     const name = ref("John Doe");
+    // ref is like use state in React
     const status = ref("active");
+    const newTask = ref('dasdad');
     const tasks = ref([{
         id:1,
-        name:"Task One"
+        taskName:"Task One"
       },
     {
         id:2,
-        name:"Task Two"
+        taskName:"Task Two"
       },
     {
         id:3,
-        name:"Task Three"
+        taskName:"Task Three"
       }]);
     // const link  = "https://google.com";
 
@@ -29,6 +31,33 @@ import { ref } from 'vue';
         status.value = 'active';
       }
     }
+
+    const addTask = () => {
+  if (newTask.value.trim() !== '') {
+    tasks.value.push({id:"x", name:newTask.value});
+    newTask.value = '';
+  }
+    }
+
+    const deleteTask = (index) => {
+      tasks.value.splice(index,1);
+    }
+
+    onMounted(async () => {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+        const data = await response.json();
+        tasks.value = data.map(task => ({
+          /// task above is the response received
+          id : task.id,
+          taskName : task.title
+
+          /// id and taskName is my own object.
+        }));
+      }catch (error) {
+        console.log('Error fetching tasks: ',error);
+      }
+    });
 </script>
 
 
@@ -38,9 +67,19 @@ import { ref } from 'vue';
 <p v-else-if="status === 'pending'">User is pending</p>
 <p v-else>User is inactive</p>
 
+
+<form @submit.prevent="addTask">
+  <!-- the ".prevent" stops the normal event propagation -->
+  <label for="newTask">Add Task</label>
+  <input type="text" id="newTask" name="newTask" v-model="newTask">
+  <button type="submit">Submit Task</button>
+
+</form>
+
 <h3>Tasks:</h3>
 <ul>
-  <li v-for="task in tasks" :key="task">{{ task.id }} - {{ task.name }}</li>
+  <li v-for="(task, index) in tasks" :key="task"><span>{{ task.id }} - {{ task.taskName }}</span>
+  <button @click="deleteTask(index)">x</button></li>
 </ul>
 
 <!-- <a v-bind:href="link"> Click for google</a> -->
