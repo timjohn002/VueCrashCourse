@@ -1,15 +1,13 @@
- <script>
+<script>
 
-import { ref } from 'vue';
-
-
-// This is for Composition API
+// This is for Options API
 export default {
   // Need to export default to have access to data and methods in my template
-  setup() {
-    const name = ref("John Doe");
-    const status = ref("active");
-    const tasks = ref([{
+  data() {
+    return {
+      name: 'John Doe',
+      status: 'pending',
+      tasks : [{
         id:1,
         name:"Task One"
       },
@@ -20,30 +18,22 @@ export default {
     {
         id:3,
         name:"Task Three"
-      }]);
-    // const link  = "https://google.com";
-
-    const toggleStatus = () => {
-       if (status.value === 'active') {
-        status.value = 'pending';
-
-        //After adding ref ("reactive") , we remove the this keyword and change to .value
-        // status.value-> status.value
-      } else if (status.value === 'pending') {
-        status.value = 'inactive';
+      }],
+      link: 'https://google.com'
+    };
+  },
+  methods: {
+    toggleStatus() {
+      if (this.status === 'active') {
+        this.status = 'pending';
+      } else if (this.status === 'pending') {
+        this.status = 'inactive';
       } else {
-        status.value = 'active';
+        this.status = 'active';
       }
     }
-
-    return {
-      name,
-      status,
-      tasks,
-      toggleStatus
-    }
   }
-  };
+}
 </script>
 
 
@@ -59,7 +49,7 @@ export default {
 </ul>
 
 <!-- <a v-bind:href="link"> Click for google</a> -->
- <!-- <a :href="link">Click for google shortcut</a> -->
+ <a :href="link">Click for google shortcut</a>
 <br />
  <!-- <button v-on:click="toggleStatus">Change Status</button> -->
   <button @click="toggleStatus">Change Status shortcut</button>
