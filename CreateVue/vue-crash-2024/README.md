@@ -15,3 +15,14 @@
 </template>
 ```
 This makes the main component clean, and I can reuse the ```App.vue``` template. ```<Navbar />``` will be used for all items that are routed.
+
+
+---
+
+### Handling loading elements
+Be careful about handling loading items.
+
+Assume that the result of a fetch is assigned to ```job```.
+Elements that uses the resulting object properties should not load before the API request is completed.
+
+This may result in a ```property undefined error```.

@@ -1,24 +1,52 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { VueSpinnerDots } from 'vue3-spinners';
+import axios from 'axios';
+import { useRoute, RouterLink } from 'vue-router';
+
+const route = useRoute();
+
+const jobId = route.params.id;
+
+const job = ref({});
+const isLoading = ref(true);
+
+onMounted(async () => {
+    try{
+        const res = await axios.get(`http://localhost:5000/jobs/${jobId}`);
+        job.value = res.data;
+
+    }catch(error){
+        console.error("Error fetching jobs.", error);
+    }finally {
+        isLoading.value = false;
+
+        console.log(job.value);
+        // This assigning is okay
+
+        // state = ??? is not okay
+    }
+});
 
 </script>
 
 <template>
-    <section class="bg-green-50">
+    <section v-if="!isLoading" class="bg-green-50">
       <div class="container m-auto py-10 px-6">
         <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
           <main>
             <div
               class="bg-white p-6 rounded-lg shadow-md text-center md:text-left"
             >
-              <div class="text-gray-500 mb-4">Full-Time</div>
-              <h1 class="text-3xl font-bold mb-4">Senior Vue Developer</h1>
+              <div class="text-gray-500 mb-4">{{ job.type }}</div>
+              <h1 class="text-3xl font-bold mb-4">{{ job.title }}</h1>
               <div
                 class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
               >
                 <i
                   class="fa-solid fa-location-dot text-lg text-orange-700 mr-2"
                 ></i>
-                <p class="text-orange-700">Boston, MA</p>
+                <p class="text-orange-700">{{ job.location }}</p>
               </div>
             </div>
 
@@ -28,15 +56,12 @@
               </h3>
 
               <p class="mb-4">
-                We are seeking a talented Front-End Developer to join our team
-                in Boston, MA. The ideal candidate will have strong skills in
-                HTML, CSS, and JavaScript, with experience working with modern
-                JavaScript frameworks such as Vue or Angular.
+                {{ job.description }}
               </p>
 
               <h3 class="text-green-800 text-lg font-bold mb-2">Salary</h3>
 
-              <p class="mb-4">$70k - $80K / Year</p>
+              <p class="mb-4">{{ job.salary }} / Year</p>
             </div>
           </main>
 
@@ -46,13 +71,10 @@
             <div class="bg-white p-6 rounded-lg shadow-md">
               <h3 class="text-xl font-bold mb-6">Company Info</h3>
 
-              <h2 class="text-2xl">NewTek Solutions</h2>
+              <h2 class="text-2xl">{{ job.company.name  }}</h2>
 
               <p class="my-2">
-                NewTek Solutions is a leading technology company specializing in
-                web development and digital solutions. We pride ourselves on
-                delivering high-quality products and services to our clients
-                while fostering a collaborative and innovative work environment.
+                {{ job.company.description }}
               </p>
 
               <hr class="my-4" />
@@ -60,12 +82,12 @@
               <h3 class="text-xl">Contact Email:</h3>
 
               <p class="my-2 bg-green-100 p-2 font-bold">
-                contact@newteksolutions.com
+                {{ job.company.contactEmail }}
               </p>
 
               <h3 class="text-xl">Contact Phone:</h3>
 
-              <p class="my-2 bg-green-100 p-2 font-bold">555-555-5555</p>
+              <p class="my-2 bg-green-100 p-2 font-bold">{{ job.company.contactPhone }}</p>
             </div>
 
             <!-- Manage -->
@@ -86,4 +108,8 @@
         </div>
       </div>
     </section>
+
+    <div v-if="isLoading" class="justify-items-center mx-auto py-6">
+      <VueSpinnerDots size="80" color="red" />
+    </div>
 </template>
