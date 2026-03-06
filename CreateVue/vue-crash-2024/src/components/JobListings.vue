@@ -1,8 +1,11 @@
 <script setup>
-import {reactive, defineProps, onMounted} from 'vue';
+import {reactive, defineProps, onMounted, ref} from 'vue';
 import JobListingSingular from '@/components/JobListingSingular.vue';
 import { RouterLink } from 'vue-router';
-import axios, { Axios } from 'axios';
+// import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import axios from 'axios';
+import { VueSpinnerDots } from 'vue3-spinners';
+
 const props = defineProps({
     maxRecords : {
         type : Number,
@@ -30,6 +33,10 @@ const props = defineProps({
     isLoading: true
  });
 
+const loading = ref(true)
+const color = ref('#3437eb')
+const size = ref('15px')
+
 
 onMounted(async () => {
     try{
@@ -55,7 +62,13 @@ onMounted(async () => {
              <h2 class="text-3xl font-bold text-green-500 mb-6 text-center">
                 Browse Jobs
              </h2>
-             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+             <!-- Show loading spinner while loading is true v-if="state.isLoading"-->
+             <div v-if="state.isLoading" class="justify-items-center mx-auto py-6">
+                <VueSpinnerDots size="80" color="red" />
+             </div>
+             <!-- Show job listing when done loading -->
+             <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <JobListingSingular v-for="job in state.jobs.slice(0, maxRecords || state.jobs.length)" :key="job.id" :job="job"/>            
         </div>
         </div>
@@ -71,3 +84,20 @@ onMounted(async () => {
     </section>
 
 </template>
+
+<style scoped>
+@keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: .25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+}</style>
