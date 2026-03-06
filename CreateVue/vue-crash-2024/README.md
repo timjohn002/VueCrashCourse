@@ -1,6 +1,8 @@
 # Study Notes
 
 ### How to implement the router.
+> Note that in the creation of the vue app, there is an option to scaffold the router. So in future projects, this does not have to be manually created.
+
 1. Created a   ```router``` folder. Inside, created ```index.js```.
 2. Created a view - ```HomeView```.
 3. Added the routes in ```index.js``` and used ```HomeView``` component.
