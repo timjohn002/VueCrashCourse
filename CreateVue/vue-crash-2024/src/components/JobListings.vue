@@ -3,7 +3,7 @@ import jobData from '@/jobs.json';
 import {ref, defineProps} from 'vue';
 import JobListingSingular from '@/components/JobListingSingular.vue';
 
-defineProps({
+const props = defineProps({
     maxRecords : {
         type : Number,
         default:10
@@ -15,8 +15,6 @@ defineProps({
 })
 
 const jobs = ref(jobData);
-console.log(jobs.value);
-
 
 </script>
 

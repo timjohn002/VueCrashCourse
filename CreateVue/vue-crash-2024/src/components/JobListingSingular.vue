@@ -1,12 +1,33 @@
 <script setup>
 
-import { defineProps } from 'vue';
+import { defineProps, ref, computed } from 'vue';
 
-defineProps({   
+const props = defineProps({   
     job: {
         type: Object
     }
 });
+
+const showFullDesc = ref(false);
+//Added computed. This means that anytime showFullDesc changes
+// truncatedDesc will run.
+
+const toggleDesc = () => {
+    showFullDesc.value = !showFullDesc.value;
+}
+
+
+const truncatedDesc = computed(() => {
+    let description = props.job.description;
+    // even though this inside a function, it is
+    // available to the template
+
+    if (!showFullDesc.value) {
+        description = description.substring(0,90) + '... ';
+    }
+    return description;
+});
+
 
 </script>
 
@@ -19,7 +40,11 @@ defineProps({
               </div>
 
               <div class="mb-5">
-                {{ job.description }}
+                <div>{{ truncatedDesc }}</div>
+                <button @click="toggleDesc" 
+                class="text-green-500 hover:text-green-600 mb-5">
+                    {{ showFullDesc ? 'Less' : 'More' }}
+                </button>
               </div>
 
               <h3 class="text-green-500 mb-2">{{ job.salary }} / Year</h3>
