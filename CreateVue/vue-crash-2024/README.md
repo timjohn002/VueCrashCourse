@@ -1,38 +1,15 @@
-# vue-crash-2024
+# Study Notes
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+### How to implement the router.
+1. Created a   ```router``` folder. Inside, created ```index.js```.
+2. Created a view - ```HomeView```.
+3. Added the routes in ```index.js``` and used ```HomeView``` component.
+4. In the ```main.js``` imported and used the router via ```app.use(router)```.
+5. In the main component, ```App.vue```, imported the ```vue-router``` to display the routed view. Leaving the main ```App.vue``` template looking like:
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+<template>
+  <Navbar />
+  <RouterView />
+</template>
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+This makes the main component clean, and I can reuse the ```App.vue``` template. ```<Navbar />``` will be used for all items that are routed.
