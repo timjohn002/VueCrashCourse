@@ -41,6 +41,9 @@ const handleSubmit = async () => {
 
     try{
         const response = await axios.post(`/api/jobs/`,newJob);
+        // The 'id' is handled by json-server.
+        // If a post request is sent without and id,
+        // it generates one
         // @todo - show toast
         router.push(`/jobs/${response.data.id}`);
 
