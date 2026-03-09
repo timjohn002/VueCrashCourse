@@ -7,6 +7,7 @@ import {reactive} from 'vue';
 import BackButton from '@/components/BackButton.vue';
 import axios from 'axios';
 import router from '@/router';
+import { useToast } from 'vue-toastification';
 
 const form = reactive({
     type:'Remote',
@@ -21,6 +22,8 @@ const form = reactive({
         contactPhone: ''
     }
 });
+
+const toast = useToast();
 
 const handleSubmit = async () => {
     const newJob = {
@@ -44,11 +47,12 @@ const handleSubmit = async () => {
         // The 'id' is handled by json-server.
         // If a post request is sent without and id,
         // it generates one
-        // @todo - show toast
+        toast.success('Job Added Successfully');
         router.push(`/jobs/${response.data.id}`);
 
     }catch(error) {
         console.log("Error submitting job.",error);
+        toast.error("Job was not added.")
     }
 }
 

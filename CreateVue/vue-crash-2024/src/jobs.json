@@ -111,6 +111,20 @@
         "contactEmail": "wml@ms.com",
         "contactPhone": "salmald"
       }
+    },
+    {
+      "id": "d435",
+      "title": "dqwwq",
+      "type": "Internship",
+      "location": "owijefoewijf",
+      "description": "lmkmflwkmfe",
+      "salary": "$150K - $175K",
+      "company": {
+        "name": "oiewjfowfeijwofijwofi",
+        "description": "lkjdsfjsdfkjl",
+        "contactEmail": "mnbmnewfmnb@m.com",
+        "contactPhone": ",ns,mnf,ns,fmn"
+      }
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
