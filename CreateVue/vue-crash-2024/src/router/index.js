@@ -6,6 +6,7 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import JobView from '@/views/JobView.vue';
 import AddJobView from '@/views/AddJobView.vue';
 import EditJobView from '@/views/EditJobView.vue';
+import DatabaseView from '@/views/DatabaseView.vue';
 
 const router = createRouter({
     history:createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,11 @@ const router = createRouter({
             //end up here.
             name: 'not-found',
             component: NotFoundView
+        },
+        {
+            path: '/dbView',
+            name: 'db',
+            component: DatabaseView
         }
     ],
 });
