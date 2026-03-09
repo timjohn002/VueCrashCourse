@@ -26,3 +26,19 @@ Assume that the result of a fetch is assigned to ```job```.
 Elements that uses the resulting object properties should not load before the API request is completed.
 
 This may result in a ```property undefined error```.
+
+---
+
+### Deployment
+
+#### npm run build
+This create a ```dist``` folder which will contain all the static assets of the project.
+
+The content in ```dist``` is what you would upload to a shared server.
+
+#### npm run preview
+Used when previewing production deployment.
+
+#### Deploying to Netlify
+1. Create a Github Repo. Push to Github.
+2. Go to Netlify.
