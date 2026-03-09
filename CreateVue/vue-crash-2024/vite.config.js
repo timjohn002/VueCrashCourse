@@ -12,6 +12,16 @@ export default defineConfig({
   ],
   server: {
     port:3000,
+    proxy: {
+      '/api':{
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/,''),
+        // added this so that on the frontend url, 
+        // so that we can call /api and it will actually
+        // point to the target.
+      }
+    }
   },
 
   resolve: {
