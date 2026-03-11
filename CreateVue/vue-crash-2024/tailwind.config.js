@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   // index is what files do i want to watch for tailwind classes
-  content: ['./index.html','./src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: ['./index.html','./src/**/*.{vue,js,ts,jsx,tsx}','./src/**/*.css'],
   theme: {
     extend: {
       fontFamily: {

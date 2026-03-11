@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+    .success {
+        @apply bg-green-500;
+    }
+
+    .primary {
+        @apply bg-blue-500;
+    }
+
+    .warning {
+        @apply bg-yellow-500;
+    }
+
+    .delete {
+        @apply bg-red-500;
+    }
+
+    .disabled {
+        @apply bg-gray-500;
+    }
+
+    .btn {
+        @apply px-4 py-2 rounded-md;
+    }
+    .btn-primary {
+        @apply btn primary text-white;
+    }
+    .btn-success {
+        @apply btn success text-white;
+    }
+
+    .btn-warning {
+        @apply btn warning text-white;
+    }
+    .btn-delete {
+        @apply btn delete text-white;
+    }
+    .btn-disabled {
+        @apply btn disabled text-white;
+    }
+
+    
+
+}

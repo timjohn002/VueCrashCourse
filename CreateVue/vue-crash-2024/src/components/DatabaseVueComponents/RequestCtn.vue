@@ -10,6 +10,10 @@ defineProps({
     desc: {
         type:String,
         default:"No description"
+    },
+    status: {
+        type:Number,
+        default:0
     }
 });
 
@@ -24,7 +28,7 @@ defineProps({
 
 <hr class="mb-2">
 <h6 class="bg-gray-200 p-2">{{ desc }}</h6>
-<div class="bg-green-100 p-2">
+<div :class="`${status==200 ? 'bg-green-100' : 'bg-red-100'} p-2`">
 <slot></slot>
 </div>
 
